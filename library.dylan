@@ -18,4 +18,6 @@ define module python-dylan
   export py-dict-new, py-dict-check;
 
   export py-int-check, py-int-as-long;
+
+  export py-string-check, py-string-as-string;
 end module;

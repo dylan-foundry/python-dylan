@@ -62,6 +62,8 @@ define function py-to-dylan (obj :: <raw-c-pointer>)
     error("Dictionaries aren't supported yet.");
   elseif (py-int-check(obj))
     py-int-as-long(obj)
+  elseif (py-string-check(obj))
+    py-string-as-string(obj)
   else
     error("Unknown type in py-to-dylan");
   end;

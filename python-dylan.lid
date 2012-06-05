@@ -4,4 +4,7 @@ license:      See License.txt in this distribution for details.
 warranty:     Distributed WITHOUT WARRANTY OF ANY KIND
 files:        library
               python-dylan
+              types
+c-files:      wrappers.c
 c-libraries:  -lpython
+jam-includes: python.jam

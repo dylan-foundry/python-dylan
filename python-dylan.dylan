@@ -73,6 +73,13 @@ define function py-to-dylan (obj :: <py-object>)
     output
   elseif (py-string-check(obj))
     py-string-as-string(obj)
+  elseif (py-tuple-check(obj))
+    let tuple-size = py-tuple-size(obj);
+    let output = make(<vector>, size: tuple-size);
+    for (i :: <integer> from 0 below tuple-size)
+      output[i] := py-to-dylan(py-tuple-get-item(obj, i))
+    end;
+    output
   else
     error("Unknown type in py-to-dylan");
   end;

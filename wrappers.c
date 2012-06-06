@@ -19,3 +19,8 @@ _Bool dylan_PyString_Check(PyObject * obj)
 {
   return PyString_Check(obj);
 }
+
+_Bool dylan_PyTuple_Check(PyObject * obj)
+{
+  return PyTuple_Check(obj);
+}

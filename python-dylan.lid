@@ -8,6 +8,7 @@ files:        library
               int
               list
               string
+              tuple
 c-files:      wrappers.c
 c-libraries:  -lpython
 jam-includes: python.jam

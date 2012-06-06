@@ -8,6 +8,8 @@ define suite python-dylan-test-suite ()
   test run-string-return-list;
   test run-string-return-nested-list;
   test run-string-return-string;
+  test run-string-return-tuple;
+  test run-string-return-nested-tuple;
 end suite;
 
 define test initialize-python ()
@@ -51,5 +53,21 @@ define test run-string-return-string ()
   check-equal("run-string can return string",
               py-run-string("\"a\" + \"b\""),
               "ab");
+  py-finalize();
+end test;
+
+define test run-string-return-tuple ()
+  py-initialize();
+  check-equal("run-string can return tuple",
+              py-run-string("(1, 2)"),
+              list(1, 2));
+  py-finalize();
+end test;
+
+define test run-string-return-nested-tuple ()
+  py-initialize();
+  check-equal("run-string can return tuple",
+              py-run-string("(1, 2, (3, 4))"),
+              list(1, 2, list(3, 4)));
   py-finalize();
 end test;

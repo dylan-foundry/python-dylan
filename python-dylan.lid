@@ -6,6 +6,7 @@ files:        library
               python-dylan
               dict
               int
+              list
               string
 c-files:      wrappers.c
 c-libraries:  -lpython

@@ -10,6 +10,11 @@ _Bool dylan_PyInt_Check(PyObject * obj)
   return PyInt_Check(obj);
 }
 
+_Bool dylan_PyList_Check(PyObject * obj)
+{
+  return PyList_Check(obj);
+}
+
 _Bool dylan_PyString_Check(PyObject * obj)
 {
   return PyString_Check(obj);

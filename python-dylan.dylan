@@ -64,6 +64,13 @@ define function py-to-dylan (obj :: <py-object>)
     error("Dictionaries aren't supported yet.");
   elseif (py-int-check(obj))
     py-int-as-long(obj)
+  elseif (py-list-check(obj))
+    let list-size = py-list-size(obj);
+    let output = make(<vector>, size: list-size);
+    for (i :: <integer> from 0 below list-size)
+      output[i] := py-to-dylan(py-list-get-item(obj, i))
+    end;
+    output
   elseif (py-string-check(obj))
     py-string-as-string(obj)
   else

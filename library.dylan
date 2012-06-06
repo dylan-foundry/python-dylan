@@ -11,6 +11,8 @@ define module python-dylan
   use common-dylan;
   use dylan-direct-c-ffi;
 
+  export <py-object>;
+
   export py-initialize, py-finalize;
 
   export py-run-simple-string, py-run-string;

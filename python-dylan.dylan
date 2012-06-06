@@ -12,6 +12,8 @@ define constant <py-start-input> = one-of(
     $py-eval-input
   );
 
+define constant <py-object> = <raw-c-pointer>;
+
 define function py-initialize () => ()
   %call-c-function ("Py_Initialize")
     () => (nothing :: <raw-c-void>)
@@ -46,9 +48,9 @@ define function py-run-string (code :: <string>,
   let py-data = %call-c-function ("PyRun_String")
       (code :: <raw-byte-string>,
        start :: <raw-c-signed-int>,
-       globals :: <raw-c-pointer>,
-       locals :: <raw-c-pointer>)
-      => (result :: <raw-c-pointer>)
+       globals :: <py-object>,
+       locals :: <py-object>)
+      => (result :: <py-object>)
       (primitive-string-as-raw(code),
        integer-as-raw(start),
        py-globals,
@@ -57,7 +59,7 @@ define function py-run-string (code :: <string>,
   py-to-dylan(py-data)
 end;
 
-define function py-to-dylan (obj :: <raw-c-pointer>)
+define function py-to-dylan (obj :: <py-object>)
   if (py-dict-check(obj))
     error("Dictionaries aren't supported yet.");
   elseif (py-int-check(obj))

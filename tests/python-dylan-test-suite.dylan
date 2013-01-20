@@ -36,7 +36,7 @@ define test run-string-return-list ()
   py-initialize();
   check-equal("run-string can return list",
               py-run-string("[1, 2]"),
-              list(1, 2));
+              vector(1, 2));
   py-finalize();
 end test;
 
@@ -44,7 +44,7 @@ define test run-string-return-nested-list ()
   py-initialize();
   check-equal("run-string can return list",
               py-run-string("[1, 2, [3, 4]]"),
-              list(1, 2, list(3, 4)));
+              vector(1, 2, vector(3, 4)));
   py-finalize();
 end test;
 
@@ -60,7 +60,7 @@ define test run-string-return-tuple ()
   py-initialize();
   check-equal("run-string can return tuple",
               py-run-string("(1, 2)"),
-              list(1, 2));
+              vector(1, 2));
   py-finalize();
 end test;
 
@@ -68,6 +68,6 @@ define test run-string-return-nested-tuple ()
   py-initialize();
   check-equal("run-string can return tuple",
               py-run-string("(1, 2, (3, 4))"),
-              list(1, 2, list(3, 4)));
+              vector(1, 2, vector(3, 4)));
   py-finalize();
 end test;

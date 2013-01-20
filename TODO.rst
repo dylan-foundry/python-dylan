@@ -6,4 +6,3 @@
   like the higher level C-FFI?
 * Implement more type conversions.
 * Fix warning about _POSIX_SOURCE when building wrapper.c
-* Python lists should map to Dylan vectors.

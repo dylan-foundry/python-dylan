@@ -1,7 +1,7 @@
 module: python-dylan
 synopsis: Python types support.
-author: Bruce Mitchener
-copyright: 2012, Data Fueled, LLC.
+author: Bruce Mitchener, Jr.
+copyright: See LICENSE file in this distribution.
 
 define inline function py-dict-new ()
   %call-c-function("PyDict_New")

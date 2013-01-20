@@ -1,7 +1,7 @@
 module: python-dylan
 synopsis: Python types support.
-author: Bruce Mitchener
-copyright: 2012, Data Fueled, LLC.
+author: Bruce Mitchener, Jr.
+copyright: See LICENSE file in this distribution.
 
 define inline function py-tuple-check (value :: <py-object>)
   primitive-raw-as-boolean(

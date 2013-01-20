@@ -1,7 +1,7 @@
 module: python-dylan
 synopsis: Embed a Python interpreter.
-author: Bruce Mitchener
-copyright: 2012, Data Fueled, LLC.
+author: Bruce Mitchener, Jr.
+copyright: See LICENSE file in this distribution.
 
 define constant $py-single-input = 256;
 define constant $py-file-input = 257;

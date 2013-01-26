@@ -12,7 +12,7 @@ define constant <py-start-input> = one-of(
     $py-eval-input
   );
 
-define constant <py-object> = <raw-c-pointer>;
+define constant <py-object> = <machine-word>;
 
 define function py-initialize () => ()
   %call-c-function ("Py_Initialize")
@@ -45,17 +45,18 @@ define function py-run-string (code :: <string>,
          locals :: false-or(<table>) = #f)
   let py-globals = py-dict-new();
   let py-locals = py-dict-new();
-  let py-data = %call-c-function ("PyRun_String")
+  let py-data = primitive-wrap-machine-word
+    (%call-c-function ("PyRun_String")
       (code :: <raw-byte-string>,
        start :: <raw-c-signed-int>,
-       globals :: <py-object>,
-       locals :: <py-object>)
-      => (result :: <py-object>)
+       globals :: <raw-machine-word>,
+       locals :: <raw-machine-word>)
+      => (result :: <raw-machine-word>)
       (primitive-string-as-raw(code),
        integer-as-raw(start),
-       py-globals,
-       py-locals)
-    end;
+       primitive-unwrap-machine-word(py-globals),
+       primitive-unwrap-machine-word(py-locals))
+    end);
   py-to-dylan(py-data)
 end;
 

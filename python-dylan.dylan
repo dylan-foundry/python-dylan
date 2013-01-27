@@ -12,7 +12,22 @@ define constant <py-start-input> = one-of(
     $py-eval-input
   );
 
-define constant <py-object> = <machine-word>;
+define constant <raw-py-object> = <raw-machine-word>;
+
+define class <py-object> (<object>)
+  constant slot raw-py-object :: <raw-py-object>,
+    required-init-keyword: raw:;
+end;
+
+define inline function wrap-raw-py-object (raw-py-object :: <raw-py-object>)
+ => (py-object :: <py-object>)
+  make(<py-object>, raw: raw-py-object);
+end;
+
+define inline function as-raw-py-object (py-object :: <py-object>)
+ => (raw-py-object :: <raw-py-object>)
+  py-object.raw-py-object
+end;
 
 define function py-initialize () => ()
   %call-c-function ("Py_Initialize")
@@ -45,17 +60,17 @@ define function py-run-string (code :: <string>,
          locals :: false-or(<table>) = #f)
   let py-globals = py-dict-new();
   let py-locals = py-dict-new();
-  let py-data = primitive-wrap-machine-word
+  let py-data = wrap-raw-py-object
     (%call-c-function ("PyRun_String")
       (code :: <raw-byte-string>,
        start :: <raw-c-signed-int>,
-       globals :: <raw-machine-word>,
-       locals :: <raw-machine-word>)
-      => (result :: <raw-machine-word>)
+       globals :: <raw-py-object>,
+       locals :: <raw-py-object>)
+      => (result :: <raw-py-object>)
       (primitive-string-as-raw(code),
        integer-as-raw(start),
-       primitive-unwrap-machine-word(py-globals),
-       primitive-unwrap-machine-word(py-locals))
+       as-raw-py-object(py-globals),
+       as-raw-py-object(py-locals))
     end);
   py-to-dylan(py-data)
 end;

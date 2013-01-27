@@ -1,5 +1,15 @@
 #include "Python.h"
 
+_Bool dylan_PyBool_Check(PyObject * obj)
+{
+  return PyBool_Check(obj);
+}
+
+_Bool dylan_PyBool_IsTrue(PyObject * obj)
+{
+  return Py_True == obj;
+}
+
 _Bool dylan_PyDict_Check(PyObject * obj)
 {
   return PyDict_Check(obj);

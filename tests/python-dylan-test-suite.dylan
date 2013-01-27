@@ -8,6 +8,7 @@ define suite python-dylan-test-suite ()
   test run-string-return-list;
   test run-string-return-nested-list;
   test run-string-return-string;
+  test run-string-return-boolean;
   test run-string-return-tuple;
   test run-string-return-nested-tuple;
 end suite;
@@ -53,6 +54,17 @@ define test run-string-return-string ()
   check-equal("run-string can return string",
               py-run-string("\"a\" + \"b\""),
               "ab");
+  py-finalize();
+end test;
+
+define test run-string-return-boolean ()
+  py-initialize();
+  check-equal("run-string can return boolean False via comparison",
+              py-run-string("1 == 2"),
+              #f);
+  check-equal("run-string can return boolean True via comparison",
+              py-run-string("1 == 1"),
+              #t);
   py-finalize();
 end test;
 

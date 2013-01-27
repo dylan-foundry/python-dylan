@@ -61,7 +61,9 @@ define function py-run-string (code :: <string>,
 end;
 
 define function py-to-dylan (obj :: <py-object>)
-  if (py-dict-check(obj))
+  if (py-bool-check(obj))
+    py-bool-is-true(obj)
+  elseif (py-dict-check(obj))
     error("Dictionaries aren't supported yet.");
   elseif (py-int-check(obj))
     py-int-as-long(obj)

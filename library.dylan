@@ -17,6 +17,8 @@ define module python-dylan
 
   export py-run-simple-string, py-run-string;
 
+  export py-bool-check, py-bool-from-long, py-bool-is-true;
+
   export py-dict-new, py-dict-check;
 
   export py-int-check, py-int-as-long;
